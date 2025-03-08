@@ -1,4 +1,6 @@
-import { Login } from "./components/Login"
+import { Login } from "./components/Login/Login"
+import { Logout } from "./components/Logout";
+import Navbar from "./components/Navbar/Navbar";
 import { isAuthenticated } from "./service/auth";
 import { useState } from "react";
 
@@ -7,10 +9,11 @@ function App() {
 
   return (
     <div>
-      <h1>Bloco de Notas</h1>
+      <Navbar />
       {loggedIn ? (
         <>
           <h1>Logado</h1>
+          <Logout onLogout={() => setLoggedIn(false)} />
         </>
       ) : (
         <Login onLogin={() => setLoggedIn(true)} />
