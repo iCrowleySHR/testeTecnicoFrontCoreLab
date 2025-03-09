@@ -2,7 +2,7 @@ import { useState } from "react";
 import { login } from "../../service/auth";
 import styles from './Login.module.css';
 
-export const Login = ({ onLogin }: { onLogin: () => void }) => {
+export const Login = ({ onLogin, onRegister }: { onLogin: () => void, onRegister: () => void }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -12,8 +12,8 @@ export const Login = ({ onLogin }: { onLogin: () => void }) => {
     try {
       await login({ email, password });
       onLogin();
-    } catch (err) {
-      setError("Usuário ou senha inválidos.");
+    } catch (err : any) {
+      setError(err.response.data.message);
     }
   };
 
@@ -40,6 +40,9 @@ export const Login = ({ onLogin }: { onLogin: () => void }) => {
             />
             <button type="submit">Entrar</button>
           </form>
+          <p className={styles.registerText}>
+            Não tem uma conta? <span onClick={onRegister} className={styles.registerLink}>Cadastre-se</span>
+          </p>
         </div>
       </div>
     </>
