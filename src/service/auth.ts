@@ -35,8 +35,12 @@ export const register = async (data: RegisterData) => {
 }
 
 export const logout = async () => {
-  await api.get("/users/logout");
-  localStorage.removeItem("token");
+  try {
+    await api.get("/users/logout");
+    localStorage.removeItem("token");
+  } catch (error) {
+    localStorage.removeItem("token");
+  }
 };
 
 export const getToken = () => {

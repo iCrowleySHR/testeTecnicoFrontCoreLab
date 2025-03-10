@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 80.5vw;
+    margin: 0 auto;
+    padding: 10px;
+    justify-content: center; 
+    position: relative;
+}
+
+.notes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vw 4vh;
+    width: 100%;
+    /* justify-content: center; */
+}
