@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register/Register";
 import { Logout } from "./components/Logout";
@@ -10,19 +10,17 @@ import ReadNotes from "./components/ReadNotes/ReadNotes";
 function App() {
   const [loggedIn, setLoggedIn] = useState(isAuthenticated());
   const [isRegistering, setIsRegistering] = useState(false);
+  const [searchQuery, setSearchQuery] = useState(""); // Adiciona o estado para o texto da pesquisa
 
   return (
     <div>
-      <Navbar />
+      <Navbar setSearchQuery={setSearchQuery} /> {/* Passa a função para atualizar o searchQuery */}
       {loggedIn ? (
         <>
-          <div style={{ backgroundColor: '#F0F2F5',  padding: '40px 0' }}>
-
-              {/* <h1>Logado</h1>
-          <Logout onLogout={() => setLoggedIn(false)} /> */}
-              <CreateNote />
-              <ReadNotes />
-            </div>
+          <div style={{ backgroundColor: '#F0F2F5', padding: '40px 0' }}>
+            <CreateNote />
+            <ReadNotes searchQuery={searchQuery} /> {/* Passa o searchQuery para o ReadNotes */}
+          </div>
         </>
       ) : isRegistering ? (
         <Register onRegister={() => setIsRegistering(false)} />
