@@ -15,10 +15,11 @@ interface NotesProps {
   removeNote: (id: number) => void;
 }
 
-const Notes = ({ id, title, content, favorite, updateNote, removeNote  }: NotesProps) => {
+const Notes = ({ id, title, content, favorite, updateNote, removeNote }: NotesProps) => {
   const [noteTitle, setNoteTitle] = useState(title);
   const [noteContent, setNoteContent] = useState(content);
   const [noteIsFavorite, setNoteIsFavorite] = useState(favorite);
+  const [editMode, setEditMode] = useState(false);
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNoteContent(e.target.value);
@@ -43,6 +44,10 @@ const Notes = ({ id, title, content, favorite, updateNote, removeNote  }: NotesP
     removeNote(id);
   }
 
+  const toggleEditMode = () => {
+    setEditMode((prevMode) => !prevMode); // Alterna entre editar e ler
+  };
+
   return (
     <div className={styles.card}>
       <div className={styles.header}>
@@ -50,6 +55,7 @@ const Notes = ({ id, title, content, favorite, updateNote, removeNote  }: NotesP
           className={styles.title}
           placeholder="Título"
           value={noteTitle}
+          readOnly={!editMode}
           onChange={handleTitleChange}
         />
         <FaRegStar
@@ -63,12 +69,17 @@ const Notes = ({ id, title, content, favorite, updateNote, removeNote  }: NotesP
         placeholder="Criar nota..."
         value={noteContent}
         onChange={handleContentChange}
+        readOnly={!editMode}
         style={{ height: "auto", minHeight: "100px" }}
       />
       <div className={styles.footer}>
         <div>
-          <BsPencilFill size={25} />
-          <RiPaintFill size={25} />
+          <BsPencilFill
+            size={25}
+            onClick={toggleEditMode}
+            className={`${styles.pencil} ${editMode ? styles.editMode : ""}`}
+          />
+          <RiPaintFill size={25} className={styles.paint} />
         </div>
         <BsX size={35} onClick={handleDeleteNote} />
       </div>
