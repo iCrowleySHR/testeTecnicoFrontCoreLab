@@ -8,6 +8,18 @@
     position: relative;
 }
 
+.title{
+    font-size: 0.8rem;
+    color: #464646;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    padding: 7px;
+    margin-left: 9px;
+    margin-top: 1vh;
+    font-weight: 400;
+}
+
 .notes {
     display: flex;
     flex-wrap: wrap;

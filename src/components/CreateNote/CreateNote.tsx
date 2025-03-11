@@ -36,8 +36,6 @@ const CreateNote: React.FC<CreateNoteProps> = ({ setCreateNewNote }) => {
     } catch (err : any) {
       console.log(err.data.message);
     }
-
-
   };
 
   const resetFields = () => {

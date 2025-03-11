@@ -59,7 +59,7 @@ const ReadNotes: React.FC<ReadNotesProps> = ({ searchQuery, createNewNote }) => 
     return (
         <>
             <div className={styles.container}>
-                <h1>Favoritas</h1>
+                <h1 className={styles.title}>Favoritas</h1>
                 {favoriteNotes.length === 0 ? (
                     <p>Nenhuma nota favorita encontrada.</p>
                 ) : (
@@ -79,7 +79,7 @@ const ReadNotes: React.FC<ReadNotesProps> = ({ searchQuery, createNewNote }) => 
                     </div>
                 )}
 
-                <h1>Outras Notas</h1>
+                <h1 className={styles.title}>Outras Notas</h1>
                 {nonFavoriteNotes.length === 0 ? (
                     <p>Nenhuma nota encontrada.</p>
                 ) : (
