@@ -4,12 +4,13 @@ import { Register } from "./components/Register/Register";
 import Navbar from "./components/Navbar/Navbar";
 import { isAuthenticated } from "./service/auth";
 import CreateNote from "./components/CreateNote/CreateNote";
-import ReadNotes from "./components/ReadNotes/ReadNotes";
+import ReadNotes, { Note } from "./components/ReadNotes/ReadNotes";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(isAuthenticated());
   const [isRegistering, setIsRegistering] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [createNewNote, setCreateNewNote] = useState<Note[]>([]);
 
   return (
     <div>
@@ -17,8 +18,8 @@ function App() {
       {loggedIn ? (
         <>
           <div style={{ backgroundColor: '#F0F2F5', padding: '40px 0' }}>
-            <CreateNote />
-            <ReadNotes searchQuery={searchQuery} /> 
+            <CreateNote setCreateNewNote={setCreateNewNote} />
+            <ReadNotes searchQuery={searchQuery} createNewNote={createNewNote} /> 
           </div>
         </>
       ) : isRegistering ? (

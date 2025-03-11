@@ -4,7 +4,7 @@ import Notes from "../Notes/Notes";
 import styles from "./ReadNotes.module.css";
 import Notification from "../Notification/Notification";
 
-interface Note {
+export interface Note {
     id: number;
     title: string;
     content: string;
@@ -14,11 +14,13 @@ interface Note {
 
 interface ReadNotesProps {
     searchQuery: string;
+    createNewNote: Array<Note>;
 }
 
-const ReadNotes: React.FC<ReadNotesProps> = ({ searchQuery }) => {
+const ReadNotes: React.FC<ReadNotesProps> = ({ searchQuery, createNewNote }) => {
     const [notes, setNotes] = useState<Note[]>([]);
     const [showMessage, setShowMessage] = useState(false);
+
 
     const fetchNotes = async () => {
         const response = await getNotes();
@@ -44,8 +46,7 @@ const ReadNotes: React.FC<ReadNotesProps> = ({ searchQuery }) => {
 
     useEffect(() => {
         fetchNotes();
-    }, []);
-
+    }, [createNewNote]);
 
     const filteredNotes = notes.filter(note =>
         note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||

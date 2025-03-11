@@ -4,6 +4,7 @@ import logo from "../../assets/logo.png";
 import { IoIosSearch } from "react-icons/io";
 import { BsX } from "react-icons/bs";
 import { logout } from "../../service/auth";
+
 interface NavbarProps {
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
   setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;

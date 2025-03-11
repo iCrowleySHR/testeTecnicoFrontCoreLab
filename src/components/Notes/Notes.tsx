@@ -104,7 +104,7 @@ const Notes = ({ id, title, content, favorite, color, updateNote, removeNote }: 
             onClick={toggleColors}
           />
         </div>
-        <BsX size={35} onClick={handleDeleteNote} />
+        <BsX size={35} onClick={handleDeleteNote} className={styles.delete} />
       </div>
 
       {showColors && (

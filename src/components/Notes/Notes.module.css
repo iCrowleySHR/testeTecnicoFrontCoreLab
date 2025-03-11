@@ -92,6 +92,10 @@
     cursor: pointer;
 }
 
+.delete{
+    cursor: pointer;
+}
+
 .pencil {
     cursor: pointer;
     margin: 7px;

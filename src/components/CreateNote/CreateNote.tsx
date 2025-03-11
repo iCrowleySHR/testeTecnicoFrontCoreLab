@@ -4,7 +4,11 @@ import { FaRegStar } from "react-icons/fa";
 import { createNote } from "../../service/note";
 import Notification from "../Notification/Notification";
 
-const CreateNote = () => {
+interface CreateNoteProps {
+  setCreateNewNote: React.Dispatch<React.SetStateAction<any>>;
+}
+
+const CreateNote: React.FC<CreateNoteProps> = ({ setCreateNewNote }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [favorite, setFavorite] = useState(false);
@@ -23,11 +27,12 @@ const CreateNote = () => {
 
   const saveNote = async () => {
     try {
-      await createNote({
+      const response = await createNote({
         title, content, favorite,
       });
       resetFields();
       showSavedMessage();
+      setCreateNewNote((prevNotes : any) => [...prevNotes, response.data]);
     } catch (err : any) {
       console.log(err.data.message);
     }
