@@ -23,6 +23,7 @@ const Notes = ({ id, title, content, favorite, updateNote, removeNote }: NotesPr
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNoteContent(e.target.value);
+    updateNote(id, noteTitle, e.target.value, noteIsFavorite);
 
     e.target.style.height = "auto";
     e.target.style.height = `${e.target.scrollHeight}px`;
@@ -45,7 +46,7 @@ const Notes = ({ id, title, content, favorite, updateNote, removeNote }: NotesPr
   }
 
   const toggleEditMode = () => {
-    setEditMode((prevMode) => !prevMode); // Alterna entre editar e ler
+    setEditMode((prevMode) => !prevMode);
   };
 
   return (
