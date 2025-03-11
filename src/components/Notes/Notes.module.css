@@ -6,6 +6,7 @@
     max-width: 25vw;
     display: flex;
     height: 55vh;
+    min-width: 2vw;
     flex-direction: column;
     position: relative;
 }
@@ -153,5 +154,11 @@
         width: 32px;
         height: 32px;
         cursor: pointer;
+    }
+}
+
+@media (max-width: 1647px) {
+    .card {
+        width: 18vw;
     }
 }
