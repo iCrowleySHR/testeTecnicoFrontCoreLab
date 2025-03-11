@@ -11,19 +11,27 @@ interface NotesProps {
   title: string;
   content: string;
   favorite: boolean;
-  updateNote: (id: number, title: string, content: string, favorite: boolean) => void;
+  color: string;  // Adicionando o campo `color` na nota para armazenar a cor atual
+  updateNote: (id: number, title: string, content: string, favorite: boolean, color: string) => void; // Atualizando a função `updateNote`
   removeNote: (id: number) => void;
 }
 
-const Notes = ({ id, title, content, favorite, updateNote, removeNote }: NotesProps) => {
+const Notes = ({ id, title, content, favorite, color, updateNote, removeNote }: NotesProps) => {
   const [noteTitle, setNoteTitle] = useState(title);
   const [noteContent, setNoteContent] = useState(content);
   const [noteIsFavorite, setNoteIsFavorite] = useState(favorite);
+  const [noteColor, setNoteColor] = useState(color);  // Estado para armazenar a cor da nota
   const [editMode, setEditMode] = useState(false);
+  const [showColors, setShowColors] = useState(false);
+
+  const colorList = [
+    "#A99A7C", "#9DD6FF", "#FFA285", "#FFE8AC", "#979797", "#F99494",
+    "#DAFF8B", "#B9FFDD", "#CDCDCD", "#FFCAB9", "#ECA1FF", "#BAE2FF"
+  ];
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNoteContent(e.target.value);
-    updateNote(id, noteTitle, e.target.value, noteIsFavorite);
+    updateNote(id, noteTitle, e.target.value, noteIsFavorite, noteColor);
 
     e.target.style.height = "auto";
     e.target.style.height = `${e.target.scrollHeight}px`;
@@ -32,12 +40,12 @@ const Notes = ({ id, title, content, favorite, updateNote, removeNote }: NotesPr
   const handleFavoriteClick = () => {
     const newFavoriteStatus = !noteIsFavorite;
     setNoteIsFavorite(newFavoriteStatus);
-    updateNote(id, noteTitle, noteContent, newFavoriteStatus);
+    updateNote(id, noteTitle, noteContent, newFavoriteStatus, noteColor);
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNoteTitle(e.target.value);
-    updateNote(id, e.target.value, noteContent, noteIsFavorite);
+    updateNote(id, e.target.value, noteContent, noteIsFavorite, noteColor);
   };
 
   const handleDeleteNote = async () => {
@@ -49,8 +57,18 @@ const Notes = ({ id, title, content, favorite, updateNote, removeNote }: NotesPr
     setEditMode((prevMode) => !prevMode);
   };
 
+  const toggleColors = () => {
+    setShowColors((prevShowColors) => !prevShowColors);
+  };
+
+  const handleColorSelect = (selectedColor: string) => {
+    setNoteColor(selectedColor); 
+    updateNote(id, noteTitle, noteContent, noteIsFavorite, selectedColor);  
+    setShowColors(false); 
+  };
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} style={{ backgroundColor: noteColor }}>
       <div className={styles.header}>
         <input
           className={styles.title}
@@ -71,19 +89,36 @@ const Notes = ({ id, title, content, favorite, updateNote, removeNote }: NotesPr
         value={noteContent}
         onChange={handleContentChange}
         readOnly={!editMode}
-        style={{ height: "auto", minHeight: "100px" }}
+        style={{ height: "auto", minHeight: "100px", backgroundColor: noteColor }}
       />
       <div className={styles.footer}>
         <div>
           <BsPencilFill
             size={25}
             onClick={toggleEditMode}
-            className={`${styles.pencil} ${editMode ? styles.editMode : ""}`}
+            className={`${styles.pencil} ${editMode ? styles.editModePencil : ""}`}
           />
-          <RiPaintFill size={25} className={styles.paint} />
+          <RiPaintFill
+            size={25}
+            className={`${styles.paint} ${showColors ? styles.editModePaint : ""}`}
+            onClick={toggleColors}
+          />
         </div>
         <BsX size={35} onClick={handleDeleteNote} />
       </div>
+
+      {showColors && (
+        <div className={styles.colors}>
+          {colorList.map((color, index) => (
+            <div
+              key={index}
+              className={styles.circle}
+              style={{ backgroundColor: color }}
+              onClick={() => handleColorSelect(color)}  
+            ></div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

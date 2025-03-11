@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register/Register";
-import { Logout } from "./components/Logout";
 import Navbar from "./components/Navbar/Navbar";
 import { isAuthenticated } from "./service/auth";
 import CreateNote from "./components/CreateNote/CreateNote";

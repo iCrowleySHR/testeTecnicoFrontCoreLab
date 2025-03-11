@@ -9,6 +9,7 @@ interface Note {
     title: string;
     content: string;
     favorite: boolean;
+    color: string;
 }
 
 interface ReadNotesProps {
@@ -30,8 +31,8 @@ const ReadNotes: React.FC<ReadNotesProps> = ({ searchQuery }) => {
         setTimeout(() => setShowMessage(false), 2000);
     };
 
-    const EditNote = async (id: number, title: string, content: string, favorite: boolean) => {
-        const updatedNote: Note = { id, title, content, favorite };
+    const EditNote = async (id: number, title: string, content: string, favorite: boolean, color : string) => {
+        const updatedNote: Note = { id, title, content, favorite, color };
         const updatedNotes = notes.map(note =>
             note.id === id ? { ...note, ...updatedNote } : note
         );
@@ -69,6 +70,7 @@ const ReadNotes: React.FC<ReadNotesProps> = ({ searchQuery }) => {
                                 title={note.title}
                                 content={note.content}
                                 favorite={note.favorite}
+                                color={note.color}
                                 updateNote={EditNote}
                                 removeNote={removeNote}
                             />
@@ -88,6 +90,7 @@ const ReadNotes: React.FC<ReadNotesProps> = ({ searchQuery }) => {
                                 title={note.title}
                                 content={note.content}
                                 favorite={note.favorite}
+                                color={note.color}
                                 updateNote={EditNote}
                                 removeNote={removeNote}
                             />
