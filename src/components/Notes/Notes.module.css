@@ -68,7 +68,7 @@
 }
 
 .colors{
-    width: 100%;
+    width: 500px;
     height: 50px;
     bottom: -5vh;
     background-color: #fff;
@@ -76,6 +76,7 @@
     border-radius: 13px;
     margin-left: 2vw;
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
     gap: 8px;
     padding: 5px;
@@ -88,7 +89,7 @@
 .circle{
     border-radius: 50%;
     width: 58px;
-    height: 85%;
+    height: 32px;
     cursor: pointer;
 }
 
@@ -137,5 +138,20 @@
 
     .input {
         border-radius: 23px;
+    }
+
+    .colors{
+        width: 280px;
+        height: 100px;
+        flex-wrap: wrap;
+        bottom: -8vh;
+        margin-left: 12vw;
+    }
+
+    .circle{
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
     }
 }
