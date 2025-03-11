@@ -18,15 +18,21 @@ const CreateNote = () => {
     e.target.style.height = `${e.target.scrollHeight}px`;
 
     if (typingTimeout) clearTimeout(typingTimeout);
-    setTypingTimeout(setTimeout(saveNote, 5000));
+    setTypingTimeout(setTimeout(saveNote, 3000));
   };
 
   const saveNote = async () => {
-    await createNote({
-      title, content, favorite,
-    });
-    resetFields();
-    showSavedMessage();
+    try {
+      await createNote({
+        title, content, favorite,
+      });
+      resetFields();
+      showSavedMessage();
+    } catch (err : any) {
+      console.log(err.data.message);
+    }
+
+
   };
 
   const resetFields = () => {

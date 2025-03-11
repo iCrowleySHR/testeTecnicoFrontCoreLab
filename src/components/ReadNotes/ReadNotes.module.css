@@ -13,5 +13,10 @@
     flex-wrap: wrap;
     gap: 2vw 4vh;
     width: 100%;
-    /* justify-content: center; */
+}
+
+@media (max-width: 768px) {
+    .notes{
+        justify-content: center;
+    }
 }

@@ -10,16 +10,16 @@ import ReadNotes from "./components/ReadNotes/ReadNotes";
 function App() {
   const [loggedIn, setLoggedIn] = useState(isAuthenticated());
   const [isRegistering, setIsRegistering] = useState(false);
-  const [searchQuery, setSearchQuery] = useState(""); // Adiciona o estado para o texto da pesquisa
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <div>
-      <Navbar setSearchQuery={setSearchQuery} /> {/* Passa a função para atualizar o searchQuery */}
+      <Navbar setSearchQuery={setSearchQuery} setLoggedIn={setLoggedIn}/>
       {loggedIn ? (
         <>
           <div style={{ backgroundColor: '#F0F2F5', padding: '40px 0' }}>
             <CreateNote />
-            <ReadNotes searchQuery={searchQuery} /> {/* Passa o searchQuery para o ReadNotes */}
+            <ReadNotes searchQuery={searchQuery} /> 
           </div>
         </>
       ) : isRegistering ? (
