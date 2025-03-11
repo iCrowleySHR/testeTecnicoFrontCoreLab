@@ -17,7 +17,7 @@ function App() {
       <Navbar setSearchQuery={setSearchQuery} setLoggedIn={setLoggedIn}/>
       {loggedIn ? (
         <>
-          <div style={{ backgroundColor: '#F0F2F5', padding: '40px 0' }}>
+          <div style={{ backgroundColor: '#F0F2F5', padding: '40px 0', minHeight: '93vh' }}>
             <CreateNote setCreateNewNote={setCreateNewNote} />
             <ReadNotes searchQuery={searchQuery} createNewNote={createNewNote} /> 
           </div>
